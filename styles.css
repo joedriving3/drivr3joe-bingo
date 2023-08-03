@@ -1,0 +1,81 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    /* Ensure container expands to accommodate content */
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.config-buttons {
+    float: left;
+}
+
+.config-buttons h3 {
+    margin: 0;
+}
+
+.config-buttons button {
+    display: block;
+    margin-bottom: 5px;
+}
+
+button {
+    margin-left: 5px;
+}
+
+.grid-container {
+    display: flex;
+}
+
+#bingo-board {
+    /* Remove fixed height and use flex-grow to expand container */
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: repeat(5, calc(20% - 10px));
+    gap: 10px;
+    margin-right: 20px;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.bingo-cell {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+
+.bingo-cell.active {
+    background-color: rgba(255, 0, 0, 0.5);
+}
+
+.bingo-cell.free-space {
+    font-weight: bold;
+}
+
+.bingo-cell-label {
+    font-size: 16px;
+    /* Set your default font size */
+    text-align: center;
+    line-height: 1.2;
+    /* Adjust line height as needed */
+    word-wrap: break-word;
+    /* Allow text to break into multiple lines */
+}
