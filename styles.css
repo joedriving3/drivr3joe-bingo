@@ -43,17 +43,48 @@ body {
 
 h1 {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
     font-size: 48px;
     color: #444;
     text-transform: uppercase;
     letter-spacing: 2px;
 }
 
+#seed-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+#seed-container label {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    text-transform: uppercase;
+}
+
+#seed {
+    width: 40%;
+    padding: 5px;
+    font-size: 15px;
+    color: #333;
+    border: 2px solid #aaa;
+    border-radius: 10px;
+    outline: none;
+    transition: border-color 0.3s ease;
+    margin-left: 5px;
+}
+
+#seed:focus {
+    border-color: #FF5722; /* Change border color when the input is focused */
+    box-shadow: 0 0 10px rgba(255, 87, 34, 0.5); /* Add a subtle box-shadow when focused */
+}
+
 .config-buttons {
     display: flex;
     justify-content: center;
-    margin-bottom: 40px;
+    margin-bottom: 1px;
 }
 
 .config-buttons h3 {
@@ -84,11 +115,12 @@ h1 {
 }
 
 button {
-    margin-left: 10px;
-    padding: 12px 24px;
+    margin-left: 1px;
+    margin-bottom: 1px;
+    padding: 6px 12px;
     background-color: #3498db;
     color: #fff;
-    font-size: 18px;
+    font-size: 13px;
     border: none;
     border-radius: 10px;
     cursor: pointer;
@@ -231,4 +263,56 @@ button:hover {
     background-color: #ff7171; /* Red color for the active state of the free space */
     color: #fff;
     box-shadow: 0 6px 15px rgba(255, 113, 113, 0.6);
+}
+
+#additional-label {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    background-color: #ff5722; /* Background color for the additional label */
+    padding: 10px 20px;
+    border-radius: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+
+    /* New keyframes for flashing text */
+    animation: flashText 0.3s infinite;
+}
+
+@keyframes flashText {
+    0% {
+        color: #ff5722;
+    }
+    50% {
+        color: #FF9800;
+    }
+    100% {
+        color: #FF5722;
+    }
+}
+
+#config-label {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #666;
+    text-transform: uppercase;
+    margin-top: 20px;
+    border-bottom: 2px solid #666; /* Add a border at the bottom for the config label */
+    padding-bottom: 10px;
+}
+
+#bingo-label {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #444;
+    text-transform: uppercase;
+    margin: 20px 0;
+    border: 2px solid #444; /* Add a border around the bingo label */
+    padding: 10px;
+    border-radius: 10px;
 }

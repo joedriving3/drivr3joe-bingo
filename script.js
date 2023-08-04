@@ -114,6 +114,7 @@ const fullHouse = [
                 cells.push(cell);
             }
         }
+        checkBingo()
     }
 
     // Function to toggle the active state of the cell
@@ -132,6 +133,10 @@ const fullHouse = [
                 toggledCells.splice(index, 1);
             }
         }
+        checkBingo()
+    }
+
+    function checkBingo() {
         const verticalBingo = verticalBingos.some((bingo) => bingo.every((number) => toggledCells.includes(number)));
         const horizontalBingo = horizontalBingos.some((bingo) => bingo.every((number) => toggledCells.includes(number)));
         const fullHouseBingo = fullHouse.every((bingo) => bingo.every((number) => toggledCells.includes(number)));
