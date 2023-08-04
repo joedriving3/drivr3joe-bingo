@@ -6,26 +6,26 @@ document.addEventListener("DOMContentLoaded", () => {
     let toggledCells = []; // Array to keep track of toggled cell numbers
 
     // Define the winning combinations for horizontal, vertical, and full house bingos
-const horizontalBingos = [
-[1, 2, 3, 4, 5],
-[6, 7, 8, 9, 10],
-[11, 12, 13, 14, 15],
-[16, 17, 18, 19, 20],
-[21, 22, 23, 24, 25]
-];
+    const horizontalBingos = [
+        [1, 2, 3, 4, 5],
+        [6, 7, 8, 9, 10],
+        [11, 12, 13, 14, 15],
+        [16, 17, 18, 19, 20],
+        [21, 22, 23, 24, 25]
+    ];
 
-const verticalBingos = [
-[1, 6, 11, 16, 21],
-[2, 7, 12, 17, 22],
-[3, 8, 13, 18, 23],
-[4, 9, 14, 19, 24],
-[5, 10, 15, 20, 25]
-];
+    const verticalBingos = [
+        [1, 6, 11, 16, 21],
+        [2, 7, 12, 17, 22],
+        [3, 8, 13, 18, 23],
+        [4, 9, 14, 19, 24],
+        [5, 10, 15, 20, 25]
+    ];
 
-const fullHouse = [
-    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25],
-    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
-];
+    const fullHouse = [
+        [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25],
+        [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+    ];
 
     // Define the configurations as arrays
     const configs = {
@@ -35,11 +35,11 @@ const fullHouse = [
             "Contributing Nothing", "Begging For Engagement", "Unnecessary Sound Effects", "Yelling For No Reason", "Incomprehensible Noises",
             "Playing A Whole Video Uninterrupted For Most Of The Video", "Selling His Shitty Merch", "Wearing His Shitty Merch", "Dead Memes", "Terrible Intro",
             "Weird Tangent About Literally Nothing Of Interest", "Awful Filters", "Excessive Zooming In", "Getting Upset Over Nothing", "Video He Is Reacting To Is Also Terrible",
-            "Unexciting Intro","Doing Literally Nothing Other Than Sitting","Stupid Subtitles",'"Oh, nooo"','"Whut??!!1"',
-            '"Wooow"',"Being Onto Something Then Stops Talking","Overdoing Fake Laughing","Blowjob Mouth","Smile That Slowly Turns Into Depression",
-            "Pausing Just To Say Something That Makes No Sense","The Video Is Better Than Joe","His Moderators Are Most Of His Channel Members","Talking While Being Onto Absolutely Nothing","Unnecessary Graphics",
-            "Copying Something Slightly Funny In The Video","Ignoring Copyright Laws","Slow Motion Effect","Doesn't Even Know What He Is Reacting To","Reacting To Himself",
-            "Watching Something Related To A Children's Show","Getting Upset Over Childish Matters"//,"","",""
+            "Unexciting Intro", "Doing Literally Nothing Other Than Sitting", "Stupid Subtitles", '"Oh, nooo"', '"Whut??!!1"',
+            '"Wooow"', "Being Onto Something Then Stops Talking", "Overdoing Fake Laughing", "Blowjob Mouth", "Smile That Slowly Turns Into Depression",
+            "Pausing Just To Say Something That Makes No Sense", "The Video Is Better Than Joe", "His Moderators Are Most Of His Channel Members", "Talking While Being Onto Absolutely Nothing", "Unnecessary Graphics",
+            "Copying Something Slightly Funny In The Video", "Ignoring Copyright Laws", "Slow Motion Effect", "Doesn't Even Know What He Is Reacting To", "Reacting To Himself",
+            "Watching Something Related To A Children's Show", "Getting Upset Over Childish Matters"//,"","",""
         ],
         config2: [
             "Config 2 - 1", "Config 2 - 2", "Config 2 - 3", "Config 2 - 4", "Config 2 - 5",
@@ -59,7 +59,8 @@ const fullHouse = [
 
     // Function to generate a random number between 1 and 99 for the seed
     function generateRandomSeed() {
-        const seed = Math.floor(Math.random() * 99) + 1;
+        Math.seedrandom(Date.now());
+        const seed = Math.floor(Math.random() * 100); 
         Math.seedrandom(seed);
         return seed;
     }
@@ -140,7 +141,7 @@ const fullHouse = [
         const verticalBingo = verticalBingos.some((bingo) => bingo.every((number) => toggledCells.includes(number)));
         const horizontalBingo = horizontalBingos.some((bingo) => bingo.every((number) => toggledCells.includes(number)));
         const fullHouseBingo = fullHouse.every((bingo) => bingo.every((number) => toggledCells.includes(number)));
-    
+
         const bingoLabel = document.getElementById("bingo-label");
         if (fullHouseBingo) {
             bingoLabel.textContent = "BINGO: FULL HOUSE!";
