@@ -2,6 +2,30 @@ document.addEventListener("DOMContentLoaded", () => {
     const bingoBoard = document.getElementById("bingo-board");
     const cells = [];
     let hasRedMarker = false;
+    let cellCounter = 1;
+    let toggledCells = []; // Array to keep track of toggled cell numbers
+
+    // Define the winning combinations for horizontal, vertical, and full house bingos
+const horizontalBingos = [
+[1, 2, 3, 4, 5],
+[6, 7, 8, 9, 10],
+[11, 12, 13, 14, 15],
+[16, 17, 18, 19, 20],
+[21, 22, 23, 24, 25]
+];
+
+const verticalBingos = [
+[1, 6, 11, 16, 21],
+[2, 7, 12, 17, 22],
+[3, 8, 13, 18, 23],
+[4, 9, 14, 19, 24],
+[5, 10, 15, 20, 25]
+];
+
+const fullHouse = [
+    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25],
+    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+];
 
     // Define the configurations as arrays
     const configs = {
@@ -14,8 +38,8 @@ document.addEventListener("DOMContentLoaded", () => {
             "Unexciting Intro","Doing Literally Nothing Other Than Sitting","Stupid Subtitles",'"Oh, nooo"','"Whut??!!1"',
             '"Wooow"',"Being Onto Something Then Stops Talking","Overdoing Fake Laughing","Blowjob Mouth","Smile That Slowly Turns Into Depression",
             "Pausing Just To Say Something That Makes No Sense","The Video Is Better Than Joe","His Moderators Are Most Of His Channel Members","Talking While Being Onto Absolutely Nothing","Unnecessary Graphics",
-            "Copying Something Slightly Funny In The Video" //,"","","","",
-            // "","","","",""
+            "Copying Something Slightly Funny In The Video","Ignoring Copyright Laws","Slow Motion Effect","Doesn't Even Know What He Is Reacting To","Reacting To Himself",
+            "Watching Something Related To A Children's Show","Getting Upset Over Childish Matters"//,"","",""
         ],
         config2: [
             "Config 2 - 1", "Config 2 - 2", "Config 2 - 3", "Config 2 - 4", "Config 2 - 5",
@@ -44,6 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function createBoard(labels) {
         bingoBoard.innerHTML = ""; // Clear previous board
         hasRedMarker = false;
+        let cellCounter = 1;
 
         // Shuffle the labels randomly (excluding the first label for the free space)
         const shuffledLabels = labels.slice(1);
@@ -81,9 +106,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 labelElement.textContent = label;
                 cell.appendChild(labelElement);
+                cell.setAttribute("data-cell-number", cellCounter);
+                cellCounter++;
 
                 cell.addEventListener("click", () => toggleCell(cell));
                 bingoBoard.appendChild(cell);
+                cells.push(cell);
             }
         }
     }
@@ -92,6 +120,53 @@ document.addEventListener("DOMContentLoaded", () => {
     function toggleCell(cell) {
         cell.classList.toggle("active");
         hasRedMarker = cells.some((cell) => cell.classList.contains("active"));
+
+        const cellNumber = parseInt(cell.getAttribute("data-cell-number"));
+
+        // Check if the cell is active and add/remove it from the toggledCells array
+        if (cell.classList.contains("active")) {
+            toggledCells.push(cellNumber);
+        } else {
+            const index = toggledCells.indexOf(cellNumber);
+            if (index !== -1) {
+                toggledCells.splice(index, 1);
+            }
+        }
+        const verticalBingo = verticalBingos.some((bingo) => bingo.every((number) => toggledCells.includes(number)));
+        const horizontalBingo = horizontalBingos.some((bingo) => bingo.every((number) => toggledCells.includes(number)));
+        const fullHouseBingo = fullHouse.every((bingo) => bingo.every((number) => toggledCells.includes(number)));
+    
+        const bingoLabel = document.getElementById("bingo-label");
+        if (fullHouseBingo) {
+            bingoLabel.textContent = "BINGO: FULL HOUSE!";
+            bingoBoard.classList.add("bingo"); // Add class for full house bingo
+        } else if (verticalBingo && horizontalBingo) {
+            bingoLabel.textContent = "BINGO: VERTICAL AND HORIZONTAL!";
+        } else if (verticalBingo) {
+            bingoLabel.textContent = "BINGO: VERTICAL!";
+            // Add class to each cell in the vertical bingo row for the 3D spin effect
+            for (const bingo of verticalBingos) {
+                if (bingo.every((number) => toggledCells.includes(number))) {
+                    for (const number of bingo) {
+                        const cellElement = document.querySelector(`[data-cell-number="${number}"]`);
+                        cellElement.classList.add("bingo-row");
+                    }
+                }
+            }
+        } else if (horizontalBingo) {
+            bingoLabel.textContent = "BINGO: HORIZONTAL!";
+            // Add class to each cell in the horizontal bingo row for the 3D spin effect
+            for (const bingo of horizontalBingos) {
+                if (bingo.every((number) => toggledCells.includes(number))) {
+                    for (const number of bingo) {
+                        const cellElement = document.querySelector(`[data-cell-number="${number}"]`);
+                        cellElement.classList.add("bingo-row");
+                    }
+                }
+            }
+        } else {
+            bingoLabel.textContent = "Keep going!";
+        }
     }
 
     // Function to export the Bingo board as PNG
