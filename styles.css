@@ -1,52 +1,100 @@
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
 }
 
 .container {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, #f2f2f2, #ffffff);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    /* Ensure container expands to accommodate content */
+    border-radius: 20px;
+    animation: box-shadow-animation 5s infinite alternate;
+}
+
+@keyframes box-shadow-animation {
+    from {
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+    to {
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
 }
 
 h1 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
+    font-size: 48px;
+    color: #444;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 .config-buttons {
-    float: left;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
 }
 
 .config-buttons h3 {
     margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+    color: #666;
+    text-transform: uppercase;
 }
 
 .config-buttons button {
-    display: block;
-    margin-bottom: 5px;
+    margin: 0 10px;
+    padding: 15px 30px;
+    background-color: #4CAF50;
+    color: #fff;
+    font-size: 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.config-buttons button:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
 button {
-    margin-left: 5px;
+    margin-left: 10px;
+    padding: 12px 24px;
+    background-color: #3498db;
+    color: #fff;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #2980b9;
 }
 
 .grid-container {
     display: flex;
+    justify-content: center;
+    margin: 30px auto;
 }
 
 #bingo-board {
-    /* Remove fixed height and use flex-grow to expand container */
     flex-grow: 1;
     display: grid;
     grid-template-columns: repeat(5, calc(20% - 10px));
     gap: 10px;
-    margin-right: 20px;
 }
 
 .controls {
@@ -56,26 +104,73 @@ button {
 }
 
 .bingo-cell {
-    padding: 10px;
+    width: 75px;
+    height: 75px;
+    padding: 20px;
     text-align: center;
-    border: 1px solid #ccc;
-    background-color: #fff;
+    border: 2px solid #ccc;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 24px;
+    font-weight: bold;
+    color: #555;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.bingo-cell:hover:not(.active) {
+    background-color: #e0e0e0;
+    transform: scale(1.05);
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 .bingo-cell.active {
-    background-color: rgba(255, 0, 0, 0.5);
+    background-color: #ff7171;
+    color: #fff;
+    box-shadow: 0 6px 15px rgba(255, 113, 113, 0.6);
 }
 
-.bingo-cell.free-space {
-    font-weight: bold;
+#bingo-board.bingo {
+    animation: shake 0.5s;
+}
+
+@keyframes shake {
+    0% {
+        transform: translate(0, 0);
+    }
+    25% {
+        transform: translate(-5px, 0);
+    }
+    50% {
+        transform: translate(5px, 0);
+    }
+    75% {
+        transform: translate(-5px, 0);
+    }
+    100% {
+        transform: translate(0, 0);
+    }
 }
 
 .bingo-cell-label {
-    font-size: 16px;
-    /* Set your default font size */
-    text-align: center;
-    line-height: 1.2;
-    /* Adjust line height as needed */
-    word-wrap: break-word;
-    /* Allow text to break into multiple lines */
+    display: inline-block;
+    max-width: 100%;
+    white-space: normal;
+    word-wrap: normal;
 }

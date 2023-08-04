@@ -10,7 +10,12 @@ document.addEventListener("DOMContentLoaded", () => {
             "Reacting To YTPs Of Himself", "Weird Breathing", "Weird Behaviour", "Moaning About Mattel", 'Looking At The Camera While Doing An "Unamused" Face',
             "Contributing Nothing", "Begging For Engagement", "Unnecessary Sound Effects", "Yelling For No Reason", "Incomprehensible Noises",
             "Playing A Whole Video Uninterrupted For Most Of The Video", "Selling His Shitty Merch", "Wearing His Shitty Merch", "Dead Memes", "Terrible Intro",
-            "Weird Tangent About Literally Nothing Of Interest", "Awful Filters", "Excessive Zooming In", "Getting Upset Over Nothing", "Video He Is Reacting To Is Also Terrible"
+            "Weird Tangent About Literally Nothing Of Interest", "Awful Filters", "Excessive Zooming In", "Getting Upset Over Nothing", "Video He Is Reacting To Is Also Terrible",
+            "Unexciting Intro","Doing Literally Nothing Other Than Sitting","Stupid Subtitles",'"Oh, nooo"','"Whut??!!1"',
+            '"Wooow"',"Being Onto Something Then Stops Talking","Overdoing Fake Laughing","Blowjob Mouth","Smile That Slowly Turns Into Depression",
+            "Pausing Just To Say Something That Makes No Sense","The Video Is Better Than Joe","His Moderators Are Most Of His Channel Members","Talking While Being Onto Absolutely Nothing","Unnecessary Graphics",
+            "Copying Something Slightly Funny In The Video" //,"","","","",
+            // "","","","",""
         ],
         config2: [
             "Config 2 - 1", "Config 2 - 2", "Config 2 - 3", "Config 2 - 4", "Config 2 - 5",
@@ -52,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Calculate the appropriate font size based on the label length
         const baseFontSize = 16; // Default font size
-        const maxCellWidth = 700; // Maximum cell width in pixels
+        const maxCellWidth = 550; // Maximum cell width in pixels
         const fontSize = Math.min(baseFontSize, maxCellWidth / maxLabelLength);
 
         // Add the cells to the board
@@ -143,6 +148,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
+    document.getElementById("generaternd").addEventListener("click", () => {
+        // Load a random seed into the seed input field on page load
+        document.getElementById("seed").value = generateRandomSeed();
+        document.getElementById("generate").click();
+    });
+
     document.getElementById("generate").addEventListener("click", () => {
         if (hasRedMarker) {
             const confirmRegenerate = confirm("Are you sure you want to regenerate? This will clear red markers.");
@@ -162,8 +173,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Set the initial configuration to Config 1 on page load
     document.getElementById("config1").click();
+    document.getElementById("generaternd").click();
 
-    // Load a random seed into the seed input field on page load
-    document.getElementById("seed").value = generateRandomSeed();
-    document.getElementById("generate").click();
 });
